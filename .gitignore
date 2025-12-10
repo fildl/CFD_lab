@@ -1,5 +1,17 @@
 # --- System ---
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Trashes
+.Spotlight-V100
+.fseventsd
+
+# --- Thumbnails ---
+._*
+Thumbs.db
+
+# --- Directories ---
 .cache/
 .local/
 .git/
