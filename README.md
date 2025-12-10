@@ -1,7 +1,7 @@
 # CFD Lab - University Course
 
-Repository for the Computational Fluid Dynamics (CFD) university course.
-This project focuses on learning and applying **OpenFOAM** and **ParaView** for fluid dynamics simulations.
+Repository for Computational Fluid Dynamics (CFD) course.
+This project focuses on **OpenFOAM** and **ParaView** for fluid dynamics simulations.
 
 ## Course Topics
 *   **RANS** (Reynolds-Averaged Navier–Stokes) simulations
