@@ -1,0 +1,147 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application         pseudoStochasticPisoFoam;
+
+/*  varianceModel:  */
+//  conIsotropicA;
+//  dynIsotropicA;
+//  anisotropicGradA;
+    anisotropicA;
+
+startFrom           latestTime;
+
+startTime           0;
+
+stopAt              endTime;
+
+endTime             124;
+
+deltaT              0.0005; // writeInterval=secStampa/deltaT
+
+writeControl        adjustableRunTime;
+//writeControl        timeStep;
+//writeControl        runTime;
+
+writeInterval       0.5;
+
+purgeWrite          0;
+
+writeFormat         ascii;
+
+writePrecision      9;
+
+writeCompression    off;
+
+timeFormat          general;
+
+timePrecision       9;
+
+runTimeModifiable   true;
+
+adjustTimeStep      true;
+
+maxCo               0.5;
+
+maxDelta            0.1;
+
+velocityLimit       1.0;
+
+//- Uncomment to have regular (every 2 hours of run time) restart files
+//secondaryWriteControl    cpuTime; // runtime
+//secondaryWriteInterval   7200;    // seconds
+//secondaryPurgeWrite      1;       // keep all but last dump
+
+
+functions
+{
+    probes
+    {
+        type                probes;
+        functionObjectLibs  ("libsampling.so");
+
+        outputControl       timeStep;
+        outputInterval      1;
+
+        probeLocations
+        (
+           ( 3.0   0.0034  1.57 )         // y+=2   viscous layer
+           ( 3.0   0.0254  1.57 )         // y+=15  buffer layer
+           ( 3.0   0.1068  1.57 )         // y+=63  log-law region
+           ( 3.0   0.2814  1.57 )         // y+=166 centerline
+        );
+
+/*
+        probeLocations
+        (
+           ( 3.0   1       1.57 )         // at center of the motor bike mask
+           ( 3.0   0.5     1.57 )          // at top of the helmet
+           ( 3.0   0.25    1.57 )         // at tail of the motorbike
+        );
+*/
+        
+        fields
+        (
+            p 
+            U
+        );
+    }
+}
+
+
+/*
+functions
+{
+
+    fieldAverage1
+    {
+        type                fieldAverage;
+        functionObjectLibs  ("libfieldFunctionObjects.so");
+        enabled             true;
+        outputControl       outputTime;
+
+        fields
+        (
+            U
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+             nuSgs
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+
+            p
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+        );
+    }
+
+}
+*/
+
+}
+
+
+// ************************************************************************* //

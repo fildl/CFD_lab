@@ -1,0 +1,26 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
+Description
+    Writes graph data for specified fields along a line, specified by start
+    and end points.
+
+\*---------------------------------------------------------------------------*/
+// run: postProcess -func singleGraph -latestTime
+// run: postProcess -func singleGraph -time 200
+/*---------------------------------------------------------------------------*/
+
+start   (3.0 0.4 0);
+end     (3.0 0.4 3.14);
+fields  (U_RS_fluct);
+nPoints 1000;
+
+axis distance;
+
+// Must be last entry
+#includeEtc "caseDicts/postProcessing/graphs/graphUniform.cfg"
+// ************************************************************************* //

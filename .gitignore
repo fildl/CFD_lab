@@ -1,0 +1,47 @@
+# --- System ---
+.DS_Store
+.cache/
+.local/
+.git/
+
+# --- OpenFOAM Core ---
+# Ignore Time directories (numbers)
+[1-9]*/
+[1-9]*.*
+
+# Exception: Keep the 0 directory
+!0/
+
+# Ignore Mesh (User requested)
+constant/polyMesh/
+*/constant/polyMesh/
+
+# Ignore automatic post-processing
+postProcessing/
+*/postProcessing/
+
+# --- Compilation ---
+# Build directories inside Make
+Make/linux*
+Make/darwin*
+**/Make/linux*
+**/Make/darwin*
+# Object files and binaries
+*.o
+*.so
+*.dep
+*.exe
+
+# --- Logs & Output ---
+log
+log.*
+*.log
+infoRun
+err
+
+# --- Dynamic Code ---
+dynamicCode/
+
+# --- Temporary/Backup editors ---
+*~
+*.swp
