@@ -1,0 +1,4 @@
+simpleCanyonBuoyancyFoam.C
+
+EXE = ../simpleCanyonBuoyancyFoam.exe
+//EXE = $(FOAM_USER_APPBIN)/simpleCanyonBuoyancyFoam

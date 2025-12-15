@@ -1,0 +1,6 @@
+ValueExpressionParser.C
+ValueExpressionLexer.C
+ValueExpressionDriver.C
+funkySetFields.C
+
+EXE = $(FOAM_USER_APPBIN)/funkySetFields

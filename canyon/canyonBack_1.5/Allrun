@@ -1,0 +1,29 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+application="$(getApplication)"
+
+runApplication ideasUnvToFoam MeshProva.unv
+
+cd constant/polyMesh/
+mv boundary dummy.boundary1
+sed -e "22s/.*/         type            cyclicAMI;/" dummy.boundary1 > dummy.boundary2
+sed -e "28s/.*/         type            cyclicAMI;/" dummy.boundary2 > dummy.boundary3
+sed -e "40s/.*/         type            symmetry;/" dummy.boundary3 > dummy.boundary4
+sed -e "34s/.*/         type    wall;/" dummy.boundary4 > dummy.boundary5
+sed -e "46s/.*/         type            wall;/" dummy.boundary5 > boundary
+rm dummy.*
+cd ../..
+
+runApplication decomposePar
+runApplication  mpirun  --oversubscribe -np 6 $application -parallel 
+runApplication reconstructPar
+
+runApplication postProcess -funcs '(residuals)'
+
+# runApplication $application
+
+#------------------------------------------------------------------------------

@@ -57,3 +57,11 @@ dynamicCode/
 # --- Temporary/Backup editors ---
 *~
 *.swp
+
+# --- Archives ---
+*.tar
+*.tar.gz
+*.tar.xz
+*.zip
+*.7z
+

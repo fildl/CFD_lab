@@ -11,6 +11,10 @@ This project focuses on **OpenFOAM** and **ParaView** for fluid dynamics simulat
 ## Directory Structure
 *   **`atmBoundaryLayerLES/`**: Setup for Large Eddy Simulations of the atmospheric boundary layer.
 *   **`atmBoundaryLayerRANS/`**: Setup for RANS simulations of the atmospheric boundary layer.
+*   **`canyon/`**: Urban canyon simulation project, including:
+    *   **`simpleCanyonBuoyancyFoam`**: Custom solver code.
+    *   **`canyonBack_1.5`**: Canyon background flow case.
+    *   **`canyonCT_neutral`**: Canyon case with neutral stratification.
 
 ## Tools
 *   [OpenFOAM](https://www.openfoam.com/) - CFD Solver

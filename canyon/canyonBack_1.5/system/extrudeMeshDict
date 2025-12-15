@@ -1,0 +1,90 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      extrudeMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// What to extrude:
+//      patch   : from patch of another case ('sourceCase')
+//      mesh    : as above but with original case included
+//      surface : from externally read surface
+
+//constructFrom mesh;
+constructFrom patch;
+//constructFrom surface;
+
+// If construct from patch/mesh:
+sourceCase "/home/simona/OpenFOAM/simona-6/run/canyonRe4.RAS";
+sourcePatches (front);
+
+// If construct from patch: patch to use for back (can be same as sourcePatch)
+exposedPatchName back;
+
+// If construct from surface:
+//surface "movingWall.stl";
+
+// Flip surface normals before usage. Valid only for extrude from surface or patch.
+flipNormals false;
+
+mergeFaces  false;
+
+//- Linear extrusion in point-normal direction
+extrudeModel        linearDirection;
+
+//- Single layer linear extrusion in point-normal direction
+//  with empty patches on front and back
+//extrudeModel        plane;
+
+//- Linear extrusion in specified direction
+//extrudeModel        linearDirection;
+
+//- Wedge extrusion of a single layer
+//  with wedge patches on front and back
+//extrudeModel        wedge;
+
+//thickness        0.5;                               // used by plane extrusion
+
+nLayers             1;
+
+//expansionRatio      1.0;
+
+wedgeCoeffs
+{
+    axisPt          (0 0.1 0);
+    axis            (-1 0 0);
+    angle           360;
+}
+
+linearNormalCoeffs
+{
+    thickness    0.005;
+}
+
+linearDirectionCoeffs
+{
+    direction    (0 0 1);
+    thickness    0.005;
+}
+
+
+// Do front and back need to be merged? Usually only makes sense for 360
+// degree wedges.
+mergeFaces false;
+
+// Merge small edges. Fraction of bounding box.
+//mergeTol 0;
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Con questo script la mesh viene sottilisssssima

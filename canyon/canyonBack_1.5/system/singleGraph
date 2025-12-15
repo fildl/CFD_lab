@@ -1,0 +1,36 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
+Description
+    Writes graph data for specified fields along a line, specified by start
+    and end points.
+
+\*---------------------------------------------------------------------------*/
+// run: postProcess -func singleGraph -latestTime
+/*---------------------------------------------------------------------------*/
+
+start   (1.25 0 2.0025);        // x = 0.75, 1.00, 1.25 per U e k
+end     (1.25 3 2.0025);        // x = 0.50, 1.00, 1.50 per c
+fields  (k);
+
+interpolationScheme cellPoint;
+
+setFormat   raw;
+
+setConfig
+{
+    //type    lineUniform; // lineCell, lineCellFace
+    //axis    distance;    // x, y, z, xyz
+    //nPoints 100;
+    
+    type    lineCell;
+    axis    y;
+}
+
+// Must be last entry
+#includeEtc "caseDicts/postProcessing/graphs/graph.cfg"
+// ************************************************************************* //
